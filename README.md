@@ -241,8 +241,14 @@ end
 これがログインの画面になります。
 ```
 <%= form_for :session, url: login_path do |f| %>
-  <%= f.text_field :email %>
-  <%= f.password_field :password %>
+  <div>
+    <label>メールアドレス</label>
+    <%= f.text_field :email %>
+  </div>
+  <div>
+    <label>パスワード</label>
+    <%= f.password_field :password %>
+  </div>
 
   <%= f.submit 'ログイン' %>
 <% end %>
@@ -381,3 +387,25 @@ rails s
 ### デザイン
 ##### ページが味気ないのでデザインをしてみましょう。
 ##### 今回はBootstrapを使用してデザインしたいと思います。
+
+/app/views/layouts/application.html.erbの```<title>BlogExample</title>```の後に下記を追加してください。  
+Bootstrapを使用するために必要になります。
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+```
+
+TOPページのテーブルの表示を綺麗にしたいと思います。
+/app/views/index/index.html.erbの```<table>```に"table"というクラス名を追加します。
+```
+<table class="table">
+```
+
+TOPページにアクセスしてみてください。
+TOPページの記事一覧が整形されていると思います。
+
+ここからは以下のページを参考に自分で思うがままのデザインをしてみましょう。  
+http://bootstrap3.cyberlab.info/
