@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>BlogExample</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div class="header" style="border-bottom:solid 1px #ccc; margin-bottom:10px; padding-bottom:10px;">
+      <h1>Blog-example</h1>
+      <% if @current_user %>
+        <p><%= @current_user.name %> | <%= link_to 'ログアウト', logout_path, method: :delete %></p>
+      <% else %>
+        <%= link_to 'ログイン', login_path %>
+      <% end %>
+    </div>
+    <%= yield %>
+    <div class="footer" style="border-top:solid 1px #ccc; margin-top:10px; padding-top:10px;">
+      <%= link_to 'TOP', root_path %>
+    </div>
+  </body>
+</html>

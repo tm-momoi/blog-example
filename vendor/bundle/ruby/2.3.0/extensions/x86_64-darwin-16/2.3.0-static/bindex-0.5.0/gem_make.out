@@ -1,0 +1,15 @@
+current directory: /Users/tatsuya.umino/business/S4U/1DAYインターン/rails-test/blog-example/vendor/bundle/ruby/2.3.0/gems/bindex-0.5.0/ext/bindex
+/Users/tatsuya.umino/.rbenv/versions/2.3.0/bin/ruby -r ./siteconf20171130-78938-igl753.rb extconf.rb
+creating Makefile
+
+current directory: /Users/tatsuya.umino/business/S4U/1DAYインターン/rails-test/blog-example/vendor/bundle/ruby/2.3.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" clean
+
+current directory: /Users/tatsuya.umino/business/S4U/1DAYインターン/rails-test/blog-example/vendor/bundle/ruby/2.3.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR="
+compiling cruby.c
+linking shared-object bindex/cruby.bundle
+
+current directory: /Users/tatsuya.umino/business/S4U/1DAYインターン/rails-test/blog-example/vendor/bundle/ruby/2.3.0/gems/bindex-0.5.0/ext/bindex
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 cruby.bundle ./.gem.20171130-78938-wpllti/bindex
