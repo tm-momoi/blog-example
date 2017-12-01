@@ -2,7 +2,7 @@
 <br/><h3 id="wow1_1" class="wow_head">docker起動</h3>
 <h5 id="wow1_1_1" class="wow_head">まず、Railsを起動するサーバーを立ててみましょう。</h5>
 <p>Windows Powershellを開き、下記のコマンドを実行してください。</p>
-<pre><code><span class="hljs-attribute">docker</span> run --privileged -it -p <span class="hljs-number">3000</span>:<span class="hljs-number">3000</span> -v C:\Users\tcmobile\Desctop\1day_intern:/1day_intern --name rails rails:latest
+<pre><code><span class="hljs-attribute">docker</span> run --privileged -it -p <span class="hljs-number">3000</span>:<span class="hljs-number">3000</span> -v C:\Users\tcmobile\Desktop\1day_intern:/1day_intern --name rails rails:latest
 </code></pre><p>Kitematicを起動し、Containersの"rails"を選択、中央上部にあるEXECボタンを選択してください。<br>Windows Powershellが表示されたら下記のコマンドを入力してください。</p>
 <pre><code><span class="hljs-built_in">cd</span> 1day_intern
 </code></pre><br/>
@@ -262,20 +262,6 @@ private
 </code></pre><p>会員限定機能を確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
 <pre><code><span class="hljs-attribute">rails</span> s
 </code></pre><p>ログインなしで記事を作成しようとするとログインページにとばされるはずです。<br>また、会員限定の記事も表示されていないはずです。</p>
-<br/><h3 id="wow1_10" class="wow_head">デザイン</h3>
-<h5 id="wow1_10_1" class="wow_head">ページが味気ないのでデザインをしてみましょう。</h5>
-<h5 id="wow1_10_2" class="wow_head">今回はBootstrapを使用してデザインしたいと思います。</h5>
-<p>/app/views/layouts/application.html.erbの<code>&lt;title&gt;BlogExample&lt;/title&gt;</code>の後に下記を追加してください。<br>Bootstrapを使用するために必要になります。</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-</code></pre><p>TOPページのテーブルの表示を綺麗にしたいと思います。
-/app/views/index/index.html.erbの<code>&lt;table&gt;</code>に"table"というクラス名を追加します。</p>
-<pre><code>&lt;table <span class="hljs-keyword">class</span>=<span class="hljs-string">"table"</span>&gt;
-</code></pre><p>TOPページにアクセスしてみてください。
-TOPページの記事一覧が整形されていると思います。</p>
-<p>以下のページを参考に自分で思うがままのデザインをしてみましょう。<br><a href="http://bootstrap3.cyberlab.info/">http://bootstrap3.cyberlab.info/</a></p>
 <br/><h3 id="wow1_11" class="wow_head">バリデーション</h3>
 <h5 id="wow1_11_1" class="wow_head">今フォームが空の状態でも登録できてしまうのでバリデーションを設定しましょう。</h5>
 <p>/app/models/article.rbの<code>class Article &lt; ApplicationRecord</code>の後に下記を追加してください。
@@ -326,3 +312,17 @@ validates <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">pre
 </tr>
 </tbody>
 </table>
+<br/><h3 id="wow1_10" class="wow_head">デザイン</h3>
+<h5 id="wow1_10_1" class="wow_head">ページが味気ないのでデザインをしてみましょう。</h5>
+<h5 id="wow1_10_2" class="wow_head">今回はBootstrapを使用してデザインしたいと思います。</h5>
+<p>/app/views/layouts/application.html.erbの<code>&lt;title&gt;BlogExample&lt;/title&gt;</code>の後に下記を追加してください。<br>Bootstrapを使用するために必要になります。</p>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre><p>TOPページのテーブルの表示を綺麗にしたいと思います。
+/app/views/index/index.html.erbの<code>&lt;table&gt;</code>に"table"というクラス名を追加します。</p>
+<pre><code>&lt;table <span class="hljs-keyword">class</span>=<span class="hljs-string">"table"</span>&gt;
+</code></pre><p>TOPページにアクセスしてみてください。
+TOPページの記事一覧が整形されていると思います。</p>
+<p>以下のページを参考に自分で思うがままのデザインをしてみましょう。<br><a href="http://bootstrap3.cyberlab.info/">http://bootstrap3.cyberlab.info/</a></p>

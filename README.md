@@ -4,7 +4,7 @@
 ##### まず、Railsを起動するサーバーを立ててみましょう。  
 Windows Powershellを開き、下記のコマンドを実行してください。
 ```
-docker run --privileged -it -p 3000:3000 -v C:\Users\tcmobile\Desctop\1day_intern:/1day_intern --name rails rails:latest
+docker run --privileged -it -p 3000:3000 -v C:\Users\tcmobile\Desktop\1day_intern:/1day_intern --name rails rails:latest
 ```
 Kitematicを起動し、Containersの"rails"を選択、中央上部にあるEXECボタンを選択してください。  
 Windows Powershellが表示されたら下記のコマンドを入力してください。
@@ -383,34 +383,6 @@ rails s
 ログインなしで記事を作成しようとするとログインページにとばされるはずです。  
 また、会員限定の記事も表示されていないはずです。
 
-
-### デザイン
-##### ページが味気ないのでデザインをしてみましょう。
-##### 今回はBootstrapを使用してデザインしたいと思います。
-
-/app/views/layouts/application.html.erbの```<title>BlogExample</title>```の後に下記を追加してください。  
-Bootstrapを使用するために必要になります。
-
-```
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-```
-
-TOPページのテーブルの表示を綺麗にしたいと思います。
-/app/views/index/index.html.erbの```<table>```に"table"というクラス名を追加します。
-```
-<table class="table">
-```
-
-TOPページにアクセスしてみてください。
-TOPページの記事一覧が整形されていると思います。
-
-以下のページを参考に自分で思うがままのデザインをしてみましょう。  
-http://bootstrap3.cyberlab.info/
-
-
 ### バリデーション
 ##### 今フォームが空の状態でも登録できてしまうのでバリデーションを設定しましょう。
 
@@ -445,3 +417,29 @@ validates :email, presence: true
 |:--|:--|
 |タイトル|100文字以内|
 |コンテンツ|1000文字以内|
+
+### デザイン
+##### ページが味気ないのでデザインをしてみましょう。
+##### 今回はBootstrapを使用してデザインしたいと思います。
+
+/app/views/layouts/application.html.erbの```<title>BlogExample</title>```の後に下記を追加してください。  
+Bootstrapを使用するために必要になります。
+
+```
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+```
+
+TOPページのテーブルの表示を綺麗にしたいと思います。
+/app/views/index/index.html.erbの```<table>```に"table"というクラス名を追加します。
+```
+<table class="table">
+```
+
+TOPページにアクセスしてみてください。
+TOPページの記事一覧が整形されていると思います。
+
+以下のページを参考に自分で思うがままのデザインをしてみましょう。  
+http://bootstrap3.cyberlab.info/
