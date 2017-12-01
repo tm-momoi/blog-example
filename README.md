@@ -65,15 +65,15 @@ has_secure_password validations: true
 /app/views/users/\_form.html.erbで以下を変更してください。
 ```
 <div class="field">
-  <%= form.label :password_digest %>
-  <%= form.text_field :password_digest, id: :user_password_digest %>
+  <%= f.label :password_digest %>
+  <%= f.text_field :password_digest, id: :user_password_digest %>
 </div>
 
 ↓
 
 <div class="field">
-  <%= form.label :password %>
-  <%= form.text_field :password, id: :user_password %>
+  <%= f.label :password %>
+  <%= f.text_field :password, id: :user_password %>
 </div>
 ```
 
@@ -237,7 +237,7 @@ class SessionsController < ApplicationController
 end
 ```
 
-/app/views/sessions/new.html.slimの最後に下記を追加してください。  
+/app/views/sessions/new.html.erbの最後に下記を追加してください。  
 これがログインの画面になります。
 ```
 <%= form_for :session, url: login_path do |f| %>
@@ -334,15 +334,15 @@ def index
 end
 
 def create
-  @articles = Article.new(article_params)
-  @articles.writer = @current_user.name
+  @article = Article.new(article_params)
+  @article.writer = @current_user.name
   respond_to do |format|
-    if @articles.save
-      format.html { redirect_to @articles, notice: 'News was successfully created.' }
-      format.json { render :show, status: :created, location: @articles }
+    if @article.save
+      format.html { redirect_to @article, notice: 'News was successfully created.' }
+      format.json { render :show, status: :created, location: @article }
     else
       format.html { render :new }
-      format.json { render json: @articles.errors, status: :unprocessable_entity }
+      format.json { render json: @article.errors, status: :unprocessable_entity }
     end
   end
 end

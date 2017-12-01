@@ -25,15 +25,15 @@ class ArticlesController < ApplicationController
   # POST /articles
   # POST /articles.json
   def create
-    @articles = Article.new(article_params)
-    @articles.writer = @current_user.name
+    @article = Article.new(article_params)
+    @article.writer = @current_user.name
     respond_to do |format|
-      if @articles.save
-        format.html { redirect_to @articles, notice: 'News was successfully created.' }
-        format.json { render :show, status: :created, location: @articles }
+      if @article.save
+        format.html { redirect_to @article, notice: 'News was successfully created.' }
+        format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
-        format.json { render json: @articles.errors, status: :unprocessable_entity }
+        format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -70,6 +70,6 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :writer, :contents, :memberOnly, :created_at, :updated_at)
+      params.require(:article).permit(:title, :contents, :memberOnly, :created_at, :updated_at)
     end
 end
