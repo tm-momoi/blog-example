@@ -1,29 +1,39 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <strong>Created at:</strong>
-  <%= @user.created_at %>
-</p>
-
-<p>
-  <strong>Updated at:</strong>
-  <%= @user.updated_at %>
-</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><strong>Data Name</strong></th>
+      <th><strong>Data</data></strong></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <td>
+        <%= @user.name %>
+      </td>
+    </tr>
+    <tr>
+      <th>Email</th>
+      <td>
+        <%= @user.email %>
+      </td>
+    </tr>
+    <tr>
+      <th>Password digest</th>
+      <td>
+        <%= @user.password_digest %>
+      </td>
+    </tr>
+    <tr>
+      <th>Created at</th>
+      <td>
+        <%= @user.created_at %>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
