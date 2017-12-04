@@ -1,7 +1,7 @@
-## Railsで2時間でブログを作成しよう!!
+# Railsで2時間でブログを作成しよう!!
 
-### docker起動
-##### まず、Railsを起動するサーバーを立ててみましょう。  
+## docker起動
+### まず、Railsを起動するサーバーを立ててみましょう。  
 Windows Powershellを開き、下記のコマンドを実行してください。
 ```
 docker run --privileged -it -p 3000:3000 -v C:\Users\tcmobile\Desktop\1day_intern:/1day_intern --name rails rails:latest
@@ -12,13 +12,18 @@ Windows Powershellが表示されたら下記のコマンドを入力してく�
 cd 1day_intern
 ```
 
-### Rails基盤作成
-##### Railsの枠組みを作成してみましょう。    
+ATOMで *1day_intern* フォルダを開いてみましょう。
+
+## Rails基盤作成
+### Railsの枠組みを作成してみましょう。    
 Windows Powershellで下記のコマンドを入力してください。
+Railsの枠組みを作成するコマンドです。
 ```
 rails new blog-example --skip-bundle
 cd blog-example
 ```
+ATOMで *1day_intern* フォルダをみてみましょう。
+*blog-example* というフォルダが作成され、その中に *app, bin, config...* などのファイルが作成されているはずです。  
 
 /Gemfileの20行目に下記を記述してください。
 ```
@@ -33,15 +38,19 @@ rails g scaffold User name:string email:string password_digest:string created_at
 rails g scaffold Article title:string writer:string contents:text memberOnly:boolean created_at:date updated_at:date
 ```
 
-### DB作成
-##### 次にデータベースを作成してみましょう。  
+ATOMで *blog-example* フォルダをみてみましょう。
+*app/controllers, app/models, app/views* 配下に必要なフォルダ、ファイルが作成されているはずです。  
+
+
+## DB作成
+### 次にデータベースを作成してみましょう。  
 Windows Powershellで下記のコマンドを実行してください。
 ```
 rake db:migrate
 ```
 
-### 初期データ投入
-##### 初期データをデータベースに投入してみましょう。  
+## 初期データ投入
+### 初期データをデータベースに投入してみましょう。  
 /db/seed.rbに下記を記述してください。  
 ここでは元データを作成しています。
 ```
@@ -55,8 +64,8 @@ end
 rake db:seed
 ```
 
-### パスワード暗号化設定
-##### パスワードを暗号化して保存するようにしてみましょう。
+## パスワード暗号化設定
+### パスワードを暗号化して保存するようにしてみましょう。
 /app/model/user.rbの```class User < ApplicationRecord```と```end```の間に下記を追加してください。
 ```
 has_secure_password validations: true
@@ -91,40 +100,36 @@ end
 ```
 
 ここで一度ページを見てみましょう。     
-Windows Powershellで下記のコマンドを実行し、*http://localhost:3000* にアクセスしてください。
+Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、*http://localhost:3000* にアクセスしてください。
 ```
 rails s
 ```
+_「Ctrl」 + cでサーバーを停止します_
 
 
 
-### TOPページ作成
-##### 現在TOPページ設定されていないのでTOPページを設定してみましょう。  
+**URL一覧**
+
+|URL|ページ概要|
+|:--|:--|
+|http://localhost:3000|TOPページ|
+|http://localhost:3000/users|ユーザ一覧|
+|http://localhost:3000/users/:id|ユーザー詳細|
+|http://localhost:3000/users/new|ユーザー新規作成|
+|http://localhost:3000/users/:id/edit|ユーザー編集|
+|http://localhost:3000/articles|記事一覧|
+|http://localhost:3000/articles/:id|記事詳細|
+|http://localhost:3000/articles/new|記事作成|
+|http://localhost:3000/articles/:id/edit|記事編集|
+
+## TOPページ作成
+### 現在TOPページ設定されていないのでTOPページを設定してみましょう。  
 /app/views配下にindexフォルダ作成、その中にindex.html.erbを作成し、下記を記述してください。  
 これがTOPページに表示されるHTMLになります。
 ```
+<h1>TOP</h1>
 <%= link_to 'Article', articles_path %>
 <%= link_to 'User', users_path %>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Writer</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @articles.each do |article| %>
-      <tr>
-        <td><%= article.title %></td>
-        <td><%= article.writer %></td>
-        <td><%= link_to 'Show', article %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 ```
 
 /config/routes.rbの```Rails.application.routes.draw do ~ end```の間に下記を記述してください。  
@@ -146,38 +151,44 @@ end
 ```
 
 ページを確認してみましょう。  
-Windows Powershellで下記のコマンドを実行し、http://localhost:3000 にアクセスしてください。
+Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、http://localhost:3000 にアクセスしてください。
 ```
 rails s
 ```
 TOPページに今作成したページが表示されているはずです。
 
 
-### ヘッダー、フッダー作成
-##### ページにヘッダーとフッターをつけてみましょう。
+## ヘッダー、フッダー作成
+### ページにヘッダーとフッターをつけてみましょう。
 /app/views/layouts/application.html.erb 11行目 ```<%= yield %>``` の前後に下記を記述してください。  
 このapplication.html.erbはすべてのViewから呼び出されます。  
 ```<%= yield %>``` の位置に他のViewの内容が挿入されます
+
+   
+_<%= yield %>前_
 ```
 <div class="header" style="border-bottom:solid 1px #ccc; margin-bottom:10px; padding-bottom:10px;">
   <h1>Blog-example</h1>
 </div>
-<%= yield %>
+```
+_<%= yield %>後_
+```
 <div class="footer" style="border-top:solid 1px #ccc; margin-top:10px; padding-top:10px;">
   <%= link_to 'TOP', root_path %>
 </div>
 ```
 ページを確認してみましょう。  
-Windows Powershellで下記のコマンドを実行し、http://localhost:3000 にアクセスしてください。
+Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、http://localhost:3000 にアクセスしてください。
 ```
 rails s
 ```
 すべてのページにヘッダーとフッターが表示されているはずです。
 
-### ログイン機能実装
-##### ログイン機能を実装してみましょう。
+## ログイン機能実装
+### ログイン機能を実装してみましょう。
 
 Windows Powershellで下記のコマンドを実行してください。  
+Railsサーバーが起動中の場合は「Ctrl + C」でサーバーを停止させてから、コマンドを入力してください。  
 ログインを処理するMVCを作成します。
 ```
 rails g controller Sessions new
@@ -241,16 +252,16 @@ end
 これがログインの画面になります。
 ```
 <%= form_for :session, url: login_path do |f| %>
-  <div>
+  <div class="form-group">
     <label>メールアドレス</label>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, class: "form-control"%>
   </div>
-  <div>
+  <div class="form-group">
     <label>パスワード</label>
-    <%= f.password_field :password %>
+    <%= f.password_field :password, class: "form-control"%>
   </div>
 
-  <%= f.submit 'ログイン' %>
+  <%= f.submit 'ログイン', class: "btn btn-default" %>
 <% end %>
 ```
 
@@ -295,7 +306,7 @@ private
 ```
 
 ログイン機能を確認してみましょう。  
-Windows Powershellで下記のコマンドを実行し、http://localhost:3000 にアクセスしてください。
+Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、http://localhost:3000 にアクセスしてください。
 ```
 rails s
 ```
@@ -305,9 +316,9 @@ Userを作成し、ログインをしてみましょう。
 
 
 
-### 会員限定機能
-##### 会員限定機能を実装してみましょう。
-##### 会員のみが記事の作成、会員限定記事の表示をできるようにします。
+## 会員限定機能
+### 会員限定機能を実装してみましょう。
+### 会員のみが記事の作成、会員限定記事の表示をできるようにします。
 /app/controllers/articles_controller.rbの```before_action :set_article, only: [:show, :edit, :update, :destroy]```の後に下記を追加してください。  
 Articleをログインしていないと作成できないようにしています。
 ```
@@ -376,51 +387,63 @@ end
 ```
 
 会員限定機能を確認してみましょう。  
-Windows Powershellで下記のコマンドを実行し、http://localhost:3000 にアクセスしてください。
+Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、http://localhost:3000 にアクセスしてください。
 ```
 rails s
 ```
 ログインなしで記事を作成しようとするとログインページにとばされるはずです。  
-また、会員限定の記事も表示されていないはずです。
+また、会員限定の記事も表示されていないと思います。
 
-### バリデーション
-##### 今フォームが空の状態でも登録できてしまうのでバリデーションを設定しましょう。
+## バリデーション
+### 今フォームが空の状態でも登録できてしまうのでバリデーションを設定しましょう。
 
-/app/models/article.rbの```class Article < ApplicationRecord```の後に下記を追加してください。
+実際にユーザーをname, emailが空の状態で、記事をtitle, contentsが空の状態で作成してみましょう。  
+　  
+
+/app/models/article.rbの```class Article < ApplicationRecord```の後に下記を追加してください。  
 タイトルとコンテンツが空の状態で登録ができないようにしています。
 ```
 validates :title, presence:true
 validates :contents, presence: true
 ```
 
-/app/models/user.rbの```has_secure_password validations: true```の後に下記を追加してください。
+/app/models/user.rbの```has_secure_password validations: true```の後に下記を追加してください。  
 名前とメールアドレスが空の状態で登録ができないようにしています。
 ```
 validates :name, presence:true
 validates :email, presence: true
 ```
 
-実際にuserを名前、メールアドレスが空の状態で登録してみてください。
+では、もう一度ユーザーをname, emailが空の状態で、記事をtitle, contentsが空の状態で作成してみましょう。
 
-余裕がある人は下記のバリデーションも追加してみましょう。  
+#### 以下のバリデーションに挑戦してみよう。
 
-##### User
+### User
 
 |データ名|バリデーション|
 |:--|:--|
 |名前|50文字以内|
 |メールアドレス|100文字以内 + メールアドレス形式のみ(-@-)|
 
-##### Article
+### Article
 
 |データ名|バリデーション|
 |:--|:--|
 |タイトル|100文字以内|
 |コンテンツ|1000文字以内|
 
-### デザイン
-##### ページが味気ないのでデザインをしてみましょう。
-##### 今回はBootstrapを使用してデザインしたいと思います。
+以下のページを参考にしてみてください。  
+https://qiita.com/shunhikita/items/772b81a1cc066e67930e
+
+
+## TOPページの修正
+### TOPページに記事のtitle, writer, memberOnly, showボタンのみの一覧を表示するようにしてみましょう。
+/app/views/articles/index.html.erb, /app/controllers/articles_controller.rbを参考にしてみましょう。
+
+
+## デザイン
+### ページが味気ないのでデザインをしてみましょう。
+### 今回はBootstrapを使用してデザインしたいと思います。
 
 /app/views/layouts/application.html.erbの```<title>BlogExample</title>```の後に下記を追加してください。  
 Bootstrapを使用するために必要になります。
@@ -432,14 +455,21 @@ Bootstrapを使用するために必要になります。
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 ```
 
-TOPページのテーブルの表示を綺麗にしたいと思います。
-/app/views/index/index.html.erbの```<table>```に"table"というクラス名を追加します。
+記事一覧ページのテーブルの表示を綺麗にしたいと思います。
+/app/views/articles/index.html.erbの```<table>```に"table"というクラス名を追加します。
 ```
 <table class="table">
 ```
 
-TOPページにアクセスしてみてください。
-TOPページの記事一覧が整形されていると思います。
+記事一覧ページにアクセスしてみてください。
+記事一覧が整形されていると思います。
 
-以下のページを参考に自分で思うがままのデザインをしてみましょう。  
-http://bootstrap3.cyberlab.info/
+
+#### 以下のデザインに挑戦してみよう
+- ユーザー一覧ページ、TOPページのテーブルもBootstrapを使用して整形してみましょう。
+- 記事作成ページ、ユーザー作成ページ、ログインページのフォームをデザインしてみましょう。  
+  以下のページを参考にしてみてください。  
+  http://bootstrap3.cyberlab.info/css/forms-basic.html
+- 記事作成ページ、ユーザー作成ページ、ログインページのボタンをデザインしてみましょう。  
+  以下のページを参考にしてみてください。  
+  http://bootstrap3.cyberlab.info/css/buttons.html

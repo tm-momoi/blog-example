@@ -197,7 +197,7 @@ MiniPortile can also verify the integrity of the downloaded file per PGP signatu
     -----BEGIN PGP PUBLIC KEY BLOCK-----
     Version: GnuPG v1
 
-    mQENBE7SKu8BCADQo6x4ZQfAcPlJMLmL8zBEBUS6GyKMMMDtrTh3Yaq481HB54oR
+    mQENBE7SKu8BCADQo6x4ZQfAcPlJMLmL8zBEBUS6GyKMMMDtrTh4Yaq481HB54oR
     [...]
     -----END PGP PUBLIC KEY BLOCK-----
   EOT

@@ -1,37 +1,41 @@
-<h2 id="wow1" class="wow_head">Railsで2時間でブログを作成しよう!!</h2>
-<br/><h3 id="wow1_1" class="wow_head">docker起動</h3>
-<h5 id="wow1_1_1" class="wow_head">まず、Railsを起動するサーバーを立ててみましょう。</h5>
+<br /><h2 id="wow1" class="wow_head">Railsで2時間でブログを作成しよう!!</h2>
+<br /><br /><h2 id="wow1_1" class="wow_head">docker起動</h2>
+<h4 id="wow1_1_1" class="wow_head">まず、Railsを起動するサーバーを立ててみましょう。</h4>
 <p>Windows Powershellを開き、下記のコマンドを実行してください。</p>
 <pre><code><span class="hljs-attribute">docker</span> run --privileged -it -p <span class="hljs-number">3000</span>:<span class="hljs-number">3000</span> -v C:\Users\tcmobile\Desktop\1day_intern:/1day_intern --name rails rails:latest
 </code></pre><p>Kitematicを起動し、Containersの"rails"を選択、中央上部にあるEXECボタンを選択してください。<br>Windows Powershellが表示されたら下記のコマンドを入力してください。</p>
 <pre><code><span class="hljs-built_in">cd</span> 1day_intern
-</code></pre><br/>
-
-</br/><h3 id="wow1_2" class="wow_head">Rails基盤作成</h3>
-<h5 id="wow1_2_1" class="wow_head">Railsの枠組みを作成してみましょう。</h5>
-<p>Windows Powershellで下記のコマンドを入力してください。</p>
+</code></pre><p>ATOMで <em>1day_intern</em> フォルダを開いてみましょう。</p>
+<br /><h2 id="wow1_2" class="wow_head">Rails基盤作成</h2>
+<h4 id="wow1_2_1" class="wow_head">Railsの枠組みを作成してみましょう。</h4>
+<p>Windows Powershellで下記のコマンドを入力してください。
+Railsの枠組みを作成するコマンドです。</p>
 <pre><code>rails new blog-example --skip-bundle
 <span class="hljs-built_in">cd</span> blog-example
-</code></pre><p>/Gemfileの20行目に下記を記述してください。</p>
+</code></pre><p>ATOMで <em>1day_intern</em> フォルダをみてみましょう。
+<em>blog-example</em> というフォルダが作成され、その中に <em>app, bin, config...</em> などのファイルが作成されているはずです。  </p>
+<p>/Gemfileの20行目に下記を記述してください。</p>
 <pre><code>gem <span class="hljs-string">'bcrypt-ruby'</span>, <span class="hljs-string">'3.1.1.rc1'</span>, :<span class="hljs-function"><span class="hljs-params">require</span> =&gt;</span> <span class="hljs-string">'bcrypt'</span>
 </code></pre><p>Windows Powershellで下記のコマンドを実行します。<br>このコマンドだけでほとんどのページが作成されてしまう恐ろしいコマンドです。</p>
 <pre><code>bundle <span class="hljs-keyword">install</span> <span class="hljs-comment">--path /usr/local/src/bundles/blog-example</span>
 rails g scaffold <span class="hljs-keyword">User</span> <span class="hljs-keyword">name</span>:<span class="hljs-keyword">string</span> email:<span class="hljs-keyword">string</span> password_digest:<span class="hljs-keyword">string</span> created_at:<span class="hljs-built_in">date</span> updated_at:<span class="hljs-built_in">date</span>
 rails g scaffold Article title:<span class="hljs-keyword">string</span> writer:<span class="hljs-keyword">string</span> <span class="hljs-keyword">contents</span>:<span class="hljs-built_in">text</span> memberOnly:<span class="hljs-built_in">boolean</span> created_at:<span class="hljs-built_in">date</span> updated_at:<span class="hljs-built_in">date</span>
-</code></pre><br/><h3 id="wow1_3" class="wow_head">DB作成</h3>
-<h5 id="wow1_3_1" class="wow_head">次にデータベースを作成してみましょう。</h5>
+</code></pre><p>ATOMで <em>blog-example</em> フォルダをみてみましょう。
+<em>app/controllers, app/models, app/views</em> 配下に必要なフォルダ、ファイルが作成されているはずです。  </p>
+<br /><h2 id="wow1_3" class="wow_head">DB作成</h2>
+<h4 id="wow1_3_1" class="wow_head">次にデータベースを作成してみましょう。</h4>
 <p>Windows Powershellで下記のコマンドを実行してください。</p>
 <pre><code><span class="hljs-selector-tag">rake</span> <span class="hljs-selector-tag">db</span><span class="hljs-selector-pseudo">:migrate</span>
-</code></pre><br/><h3 id="wow1_4" class="wow_head">初期データ投入</h3>
-<h5 id="wow1_4_1" class="wow_head">初期データをデータベースに投入してみましょう。</h5>
+</code></pre><br /><h2 id="wow1_4" class="wow_head">初期データ投入</h2>
+<h4 id="wow1_4_1" class="wow_head">初期データをデータベースに投入してみましょう。</h4>
 <p>/db/seed.rbに下記を記述してください。<br>ここでは元データを作成しています。</p>
 <pre><code><span class="hljs-number">10</span>.times <span class="hljs-keyword">do</span> <span class="hljs-params">|i|</span>
   Article.create(<span class="hljs-symbol">title:</span> <span class="hljs-string">"タイトル<span class="hljs-subst">#{i}</span>"</span>, <span class="hljs-symbol">writer:</span> <span class="hljs-string">"ジロー"</span>, <span class="hljs-symbol">memberOnly:</span> i % <span class="hljs-number">2</span>, <span class="hljs-symbol">contents:</span> <span class="hljs-string">"この文章はダミーです。文字の大きさ、量、字間、行間等を確認するために入れています。"</span>)
 <span class="hljs-keyword">end</span>
 </code></pre><p>/Windows Powershellで下記のコマンドを実行してください。<br>このコマンドで実際にDBに値を入れています。</p>
 <pre><code><span class="hljs-selector-tag">rake</span> <span class="hljs-selector-tag">db</span><span class="hljs-selector-pseudo">:seed</span>
-</code></pre><br/><h3 id="wow1_5" class="wow_head">パスワード暗号化設定</h3>
-<h5 id="wow1_5_1" class="wow_head">パスワードを暗号化して保存するようにしてみましょう。</h5>
+</code></pre><br /><h2 id="wow1_5" class="wow_head">パスワード暗号化設定</h2>
+<h4 id="wow1_5_1" class="wow_head">パスワードを暗号化して保存するようにしてみましょう。</h4>
 <p>/app/model/user.rbの<code>class User &lt; ApplicationRecord</code>と<code>end</code>の間に下記を追加してください。</p>
 <pre><code><span class="hljs-attribute">has_secure_password</span> validations: <span class="hljs-literal">true</span>
 </code></pre><p>/app/views/users/_form.html.erbで以下を変更してください。</p>
@@ -56,33 +60,62 @@ rails g scaffold Article title:<span class="hljs-keyword">string</span> writer:<
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">user_params</span></span>
   params.<span class="hljs-keyword">require</span>(<span class="hljs-symbol">:user</span>).permit(<span class="hljs-symbol">:name</span>, <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">:password</span>, <span class="hljs-symbol">:created_at</span>, <span class="hljs-symbol">:updated_at</span>)
 <span class="hljs-keyword">end</span>
-</code></pre><p>ここで一度ページを見てみましょう。<br>Windows Powershellで下記のコマンドを実行し、<em><a href="http://localhost:3000">http://localhost:3000</a></em> にアクセスしてください。</p>
+</code></pre><p>ここで一度ページを見てみましょう。<br>Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、<em><a href="http://localhost:3000">http://localhost:3000</a></em> にアクセスしてください。</p>
 <pre><code><span class="hljs-attribute">rails</span> s
-</code></pre><br/><h3 id="wow1_6" class="wow_head">TOPページ作成</h3>
-<h5 id="wow1_6_1" class="wow_head">現在TOPページ設定されていないのでTOPページを設定してみましょう。</h5>
+</code></pre><p><em>「Ctrl」 + cでサーバーを停止します</em></p>
+<p><strong>URL一覧</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">URL</th>
+<th style="text-align:left">ページ概要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000">http://localhost:3000</a></td>
+<td style="text-align:left">TOPページ</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/users">http://localhost:3000/users</a></td>
+<td style="text-align:left">ユーザ一覧</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/users/:id">http://localhost:3000/users/:id</a></td>
+<td style="text-align:left">ユーザー詳細</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/users/new">http://localhost:3000/users/new</a></td>
+<td style="text-align:left">ユーザー新規作成</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/users/:id/edit">http://localhost:3000/users/:id/edit</a></td>
+<td style="text-align:left">ユーザー編集</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/articles">http://localhost:3000/articles</a></td>
+<td style="text-align:left">記事一覧</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/articles/:id">http://localhost:3000/articles/:id</a></td>
+<td style="text-align:left">記事詳細</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/articles/new">http://localhost:3000/articles/new</a></td>
+<td style="text-align:left">記事作成</td>
+</tr>
+<tr>
+<td style="text-align:left"><a href="http://localhost:3000/articles/:id/edit">http://localhost:3000/articles/:id/edit</a></td>
+<td style="text-align:left">記事編集</td>
+</tr>
+</tbody>
+</table>
+<br /><h2 id="wow1_6" class="wow_head">TOPページ作成</h2>
+<h4 id="wow1_6_1" class="wow_head">現在TOPページ設定されていないのでTOPページを設定してみましょう。</h4>
 <p>/app/views配下にindexフォルダ作成、その中にindex.html.erbを作成し、下記を記述してください。<br>これがTOPページに表示されるHTMLになります。</p>
-<pre><code>&lt;%= link_to <span class="hljs-string">'Article'</span>, articles_path %&gt;
-<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> '<span class="hljs-attr">User</span>', <span class="hljs-attr">users_path</span> %&gt;</span>
-
-<span class="hljs-tag">&lt;<span class="hljs-name">table</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Title<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">th</span>&gt;</span>Writer<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">colspan</span>=<span class="hljs-string">"3"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-    <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
-
-  <span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">%</span> @<span class="hljs-attr">articles.each</span> <span class="hljs-attr">do</span> |<span class="hljs-attr">article</span>| %&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">article.title</span> %&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">article.writer</span> %&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-        <span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> '<span class="hljs-attr">Show</span>', <span class="hljs-attr">article</span> %&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-      <span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">end</span> %&gt;</span>
-  <span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span></span>
+<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>TOP<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> '<span class="hljs-attr">Article</span>', <span class="hljs-attr">articles_path</span> %&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> '<span class="hljs-attr">User</span>', <span class="hljs-attr">users_path</span> %&gt;</span>
 </code></pre><p>/config/routes.rbの<code>Rails.application.routes.draw do ~ end</code>の間に下記を記述してください。<br>ここではTOPページのルーティングの設定をしています。</p>
 <pre><code><span class="hljs-attribute">root</span> <span class="hljs-string">'index#index'</span>
 </code></pre><p>/app/controller配下にindex_controller.rb作成し、下記を記述してください。</p>
@@ -93,25 +126,26 @@ rails g scaffold Article title:<span class="hljs-keyword">string</span> writer:<
   <span class="hljs-keyword">end</span>
 
 <span class="hljs-keyword">end</span>
-</code></pre><p>ページを確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
+</code></pre><p>ページを確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
 <pre><code><span class="hljs-attribute">rails</span> s
 </code></pre><p>TOPページに今作成したページが表示されているはずです。</p>
-<br/><h3 id="wow1_7" class="wow_head">ヘッダー、フッダー作成</h3>
-<h5 id="wow1_7_1" class="wow_head">ページにヘッダーとフッターをつけてみましょう。</h5>
+<br /><h2 id="wow1_7" class="wow_head">ヘッダー、フッダー作成</h2>
+<h4 id="wow1_7_1" class="wow_head">ページにヘッダーとフッターをつけてみましょう。</h4>
 <p>/app/views/layouts/application.html.erb 11行目 <code>&lt;%= yield %&gt;</code> の前後に下記を記述してください。<br>このapplication.html.erbはすべてのViewから呼び出されます。<br><code>&lt;%= yield %&gt;</code> の位置に他のViewの内容が挿入されます</p>
-<pre><code><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"header"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"border-bottom:solid 1px #ccc; margin-bottom:10px; padding-bottom:10px;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Blog-example<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">yield</span> %&gt;</span>
-<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"footer"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"border-top:solid 1px #ccc; margin-top:10px; padding-top:10px;"</span>&gt;</span>
-  <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> '<span class="hljs-attr">TOP</span>', <span class="hljs-attr">root_path</span> %&gt;</span>
-<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-</code></pre><p>ページを確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
+<p><em>&lt;%= yield %&gt;前</em></p>
+<pre><code>&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"header"</span> style=<span class="hljs-string">"border-bottom:solid 1px #ccc; margin-bottom:10px; padding-bottom:10px;"</span>&gt;
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Blog-example<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>
+&lt;<span class="hljs-regexp">/div&gt;</span>
+</code></pre><p><em>&lt;%= yield %&gt;後</em></p>
+<pre><code>&lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"footer"</span> style=<span class="hljs-string">"border-top:solid 1px #ccc; margin-top:10px; padding-top:10px;"</span>&gt;
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> '<span class="hljs-attr">TOP</span>', <span class="hljs-attr">root_path</span> %&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+</code></pre><p>ページを確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
 <pre><code><span class="hljs-attribute">rails</span> s
 </code></pre><p>すべてのページにヘッダーとフッターが表示されているはずです。</p>
-<br/><h3 id="wow1_8" class="wow_head">ログイン機能実装</h3>
-<h5 id="wow1_8_1" class="wow_head">ログイン機能を実装してみましょう。</h5>
-<p>Windows Powershellで下記のコマンドを実行してください。<br>ログインを処理するMVCを作成します。</p>
+<br /><h2 id="wow1_8" class="wow_head">ログイン機能実装</h2>
+<h4 id="wow1_8_1" class="wow_head">ログイン機能を実装してみましょう。</h4>
+<p>Windows Powershellで下記のコマンドを実行してください。<br>Railsサーバーが起動中の場合は「Ctrl + C」でサーバーを停止させてから、コマンドを入力してください。<br>ログインを処理するMVCを作成します。</p>
 <pre><code>rails g controller Sessions <span class="hljs-keyword">new</span>
 </code></pre><p>/config/routes.rbの<code>Rails.application.routes.draw do</code>と<code>end</code>の間に下記を追加してください。<br>ログインのルーティングの設定をしています。</p>
 <pre><code>get <span class="hljs-string">'login'</span>, to: <span class="hljs-string">'sessions#new'</span>
@@ -162,16 +196,16 @@ post <span class="hljs-string">'login'</span>, to: <span class="hljs-string">'se
 <span class="hljs-keyword">end</span>
 </code></pre><p>/app/views/sessions/new.html.erbの最後に下記を追加してください。<br>これがログインの画面になります。</p>
 <pre><code>&lt;%= form_for :session, <span class="hljs-attr">url</span>: login_path <span class="hljs-keyword">do</span> |f| %&gt;
-  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>
+  <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"form-group"</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>メールアドレス<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
-    <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">f.text_field</span> <span class="hljs-attr">:email</span> %&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">f.text_field</span> <span class="hljs-attr">:email</span>, <span class="hljs-attr">class:</span> "<span class="hljs-attr">form-control</span>"%&gt;</span>
   <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-  &lt;div&gt;
+  &lt;div <span class="hljs-class"><span class="hljs-keyword">class</span></span>=<span class="hljs-string">"form-group"</span>&gt;
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">label</span>&gt;</span>パスワード<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span></span>
-    &lt;%= f.password_field :password %&gt;
+    &lt;%= f.password_field :password, <span class="hljs-attr">class</span>: <span class="hljs-string">"form-control"</span>%&gt;
   <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
 
-  &lt;%= f.submit <span class="hljs-string">'ログイン'</span> %&gt;
+  &lt;%= f.submit <span class="hljs-string">'ログイン'</span>, <span class="hljs-attr">class</span>: <span class="hljs-string">"btn btn-default"</span> %&gt;
 <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">end</span> %&gt;</span></span>
 </code></pre><p>/app/controllers/application_controller.rbの<code>protect_from_forgery with: :exception</code>の後に下記を追記してください。<br>ログインしているか判定する処理になります。</p>
 <pre><code>before_action <span class="hljs-symbol">:current_user</span>
@@ -205,12 +239,12 @@ private
 &lt;% <span class="hljs-keyword">else</span> %&gt;
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">link_to</span> 'ログイン', <span class="hljs-attr">login_path</span> %&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">end</span> %&gt;</span></span>
-</code></pre><p>ログイン機能を確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
+</code></pre><p>ログイン機能を確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
 <pre><code><span class="hljs-attribute">rails</span> s
 </code></pre><p>Userを作成し、ログインをしてみましょう。<br>成功した場合はヘッダーにログインユーザーの名前が表示されるはずです。</p>
-<br/><h3 id="wow1_9" class="wow_head">会員限定機能</h3>
-<h5 id="wow1_9_1" class="wow_head">会員限定機能を実装してみましょう。</h5>
-<h5 id="wow1_9_2" class="wow_head">会員のみが記事の作成、会員限定記事の表示をできるようにします。</h5>
+<br /><h2 id="wow1_9" class="wow_head">会員限定機能</h2>
+<h4 id="wow1_9_1" class="wow_head">会員限定機能を実装してみましょう。</h4>
+<h4 id="wow1_9_2" class="wow_head">会員のみが記事の作成、会員限定記事の表示をできるようにします。</h4>
 <p>/app/controllers/articles_controller.rbの<code>before_action :set_article, only: [:show, :edit, :update, :destroy]</code>の後に下記を追加してください。<br>Articleをログインしていないと作成できないようにしています。</p>
 <pre><code>before_action <span class="hljs-symbol">:require_sign_in!</span>, <span class="hljs-symbol">only:</span> [<span class="hljs-symbol">:new</span>, <span class="hljs-symbol">:create</span>, <span class="hljs-symbol">:edit</span>, <span class="hljs-symbol">:update</span>, <span class="hljs-symbol">:destroy</span>]
 </code></pre><p>/app/model/article.rbの<code>class Blog &lt; ApplicationRecord</code>と<code>end</code>の間に下記を追加してください。<br>ログイン状況に応じた記事を取り出す処理になります。</p>
@@ -223,7 +257,7 @@ private
 <span class="hljs-keyword">end</span>
 </code></pre><p>/app/controllers/articles_controller.rbの<code>def index</code>と<code>def create</code>を下記のように変更してください。<br>ログイン状況に応じて記事を取得するようにしています。</p>
 <pre><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">index</span></span>
-  @article = Article.getArticles(signed_in?)
+  @articles = Article.getArticles(signed_in?)
 <span class="hljs-keyword">end</span>
 
 <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create</span></span>
@@ -259,22 +293,22 @@ private
   <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">form.label</span> <span class="hljs-attr">:updated_at</span> %&gt;</span>
   <span class="hljs-tag">&lt;<span class="hljs-name">%=</span> <span class="hljs-attr">form.date_select</span> <span class="hljs-attr">:updated_at</span>, <span class="hljs-attr">id:</span> <span class="hljs-attr">:article_updated_at</span> %&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
-</code></pre><p>会員限定機能を確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
+</code></pre><p>会員限定機能を確認してみましょう。<br>Windows Powershellで下記のコマンドを実行し、Railsサーバーを起動させ、<a href="http://localhost:3000">http://localhost:3000</a> にアクセスしてください。</p>
 <pre><code><span class="hljs-attribute">rails</span> s
-</code></pre><p>ログインなしで記事を作成しようとするとログインページにとばされるはずです。<br>また、会員限定の記事も表示されていないはずです。</p>
-<br/><h3 id="wow1_11" class="wow_head">バリデーション</h3>
-<h5 id="wow1_11_1" class="wow_head">今フォームが空の状態でも登録できてしまうのでバリデーションを設定しましょう。</h5>
-<p>/app/models/article.rbの<code>class Article &lt; ApplicationRecord</code>の後に下記を追加してください。
-タイトルとコンテンツが空の状態で登録ができないようにしています。</p>
+</code></pre><p>ログインなしで記事を作成しようとするとログインページにとばされるはずです。<br>また、会員限定の記事も表示されていないと思います。</p>
+<br /><h2 id="wow1_10" class="wow_head">バリデーション</h2>
+<h4 id="wow1_10_1" class="wow_head">今フォームが空の状態でも登録できてしまうのでバリデーションを設定しましょう。</h4>
+<p>実際にユーザーをname, emailが空の状態で、記事をtitle, contentsが空の状態で作成してみましょう。
+　  </p>
+<p>/app/models/article.rbの<code>class Article &lt; ApplicationRecord</code>の後に下記を追加してください。<br>タイトルとコンテンツが空の状態で登録ができないようにしています。</p>
 <pre><code>validates <span class="hljs-symbol">:title</span>, <span class="hljs-symbol">presence:</span><span class="hljs-literal">true</span>
 validates <span class="hljs-symbol">:contents</span>, <span class="hljs-symbol">presence:</span> <span class="hljs-literal">true</span>
-</code></pre><p>/app/models/user.rbの<code>has_secure_password validations: true</code>の後に下記を追加してください。
-名前とメールアドレスが空の状態で登録ができないようにしています。</p>
+</code></pre><p>/app/models/user.rbの<code>has_secure_password validations: true</code>の後に下記を追加してください。<br>名前とメールアドレスが空の状態で登録ができないようにしています。</p>
 <pre><code>validates <span class="hljs-symbol">:name</span>, <span class="hljs-symbol">presence:</span><span class="hljs-literal">true</span>
 validates <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">presence:</span> <span class="hljs-literal">true</span>
-</code></pre><p>実際にuserを名前、メールアドレスが空の状態で登録してみてください。</p>
-<p>余裕がある人は下記のバリデーションも追加してみましょう。  </p>
-<h5 id="wow1_11_2" class="wow_head">User</h5>
+</code></pre><p>では、もう一度ユーザーをname, emailが空の状態で、記事をtitle, contentsが空の状態で作成してみましょう。</p>
+<h4 id="wow1_10_1_1" class="wow_head">以下のバリデーションに挑戦してみよう。</h4>
+<h4 id="wow1_10_2" class="wow_head">User</h4>
 <table>
 <thead>
 <tr>
@@ -293,7 +327,7 @@ validates <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">pre
 </tr>
 </tbody>
 </table>
-<h5 id="wow1_11_3" class="wow_head">Article</h5>
+<h4 id="wow1_10_3" class="wow_head">Article</h4>
 <table>
 <thead>
 <tr>
@@ -312,17 +346,26 @@ validates <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">pre
 </tr>
 </tbody>
 </table>
-<br/><h3 id="wow1_10" class="wow_head">デザイン</h3>
-<h5 id="wow1_10_1" class="wow_head">ページが味気ないのでデザインをしてみましょう。</h5>
-<h5 id="wow1_10_2" class="wow_head">今回はBootstrapを使用してデザインしたいと思います。</h5>
+<p>以下のページを参考にしてみてください。<br><a href="https://qiita.com/shunhikita/items/772b81a1cc066e67930e">https://qiita.com/shunhikita/items/772b81a1cc066e67930e</a></p>
+<br /><h2 id="wow1_11" class="wow_head">TOPページの修正</h2>
+<h4 id="wow1_11_1" class="wow_head">TOPページに記事のtitle, writer, memberOnly, showボタンのみの一覧を表示するようにしてみましょう。</h4>
+<p>/app/views/articles/index.html.erb, /app/controllers/articles_controller.rbを参考にしてみましょう。</p>
+<br /><h2 id="wow1_12" class="wow_head">デザイン</h2>
+<h4 id="wow1_12_1" class="wow_head">ページが味気ないのでデザインをしてみましょう。</h4>
+<h4 id="wow1_12_2" class="wow_head">今回はBootstrapを使用してデザインしたいと思います。</h4>
 <p>/app/views/layouts/application.html.erbの<code>&lt;title&gt;BlogExample&lt;/title&gt;</code>の後に下記を追加してください。<br>Bootstrapを使用するために必要になります。</p>
 <pre><code><span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"viewport"</span> <span class="hljs-attr">content</span>=<span class="hljs-string">"width=device-width, initial-scale=1"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
 <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
-</code></pre><p>TOPページのテーブルの表示を綺麗にしたいと思います。
-/app/views/index/index.html.erbの<code>&lt;table&gt;</code>に"table"というクラス名を追加します。</p>
+</code></pre><p>記事一覧ページのテーブルの表示を綺麗にしたいと思います。
+/app/views/articles/index.html.erbの<code>&lt;table&gt;</code>に"table"というクラス名を追加します。</p>
 <pre><code>&lt;table <span class="hljs-keyword">class</span>=<span class="hljs-string">"table"</span>&gt;
-</code></pre><p>TOPページにアクセスしてみてください。
-TOPページの記事一覧が整形されていると思います。</p>
-<p>以下のページを参考に自分で思うがままのデザインをしてみましょう。<br><a href="http://bootstrap3.cyberlab.info/">http://bootstrap3.cyberlab.info/</a></p>
+</code></pre><p>記事一覧ページにアクセスしてみてください。
+記事一覧が整形されていると思います。</p>
+<h4 id="wow1_12_2_1" class="wow_head">以下のデザインに挑戦してみよう</h4>
+<ul>
+<li>ユーザー一覧ページ、TOPページのテーブルもBootstrapを使用して整形してみましょう。</li>
+<li>記事作成ページ、ユーザー作成ページ、ログインページのフォームをデザインしてみましょう。<br>以下のページを参考にしてみてください。<br><a href="http://bootstrap3.cyberlab.info/css/forms-basic.html">http://bootstrap3.cyberlab.info/css/forms-basic.html</a></li>
+<li>記事作成ページ、ユーザー作成ページ、ログインページのボタンをデザインしてみましょう。<br>以下のページを参考にしてみてください。<br><a href="http://bootstrap3.cyberlab.info/css/buttons.html">http://bootstrap3.cyberlab.info/css/buttons.html</a></li>
+</ul>
