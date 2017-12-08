@@ -205,7 +205,7 @@ post <span class="hljs-string">'login'</span>, to: <span class="hljs-string">'se
     &lt;%= f.password_field :password, <span class="hljs-attr">class</span>: <span class="hljs-string">"form-control"</span>%&gt;
   <span class="xml"><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
 
-  &lt;%= f.submit <span class="hljs-string">'ログイン'</span>, <span class="hljs-attr">class</span>: <span class="hljs-string">"btn btn-default"</span> %&gt;
+  &lt;%= f.submit <span class="hljs-attr">class</span>: <span class="hljs-string">"btn btn-default"</span> %&gt;
 <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">%</span> <span class="hljs-attr">end</span> %&gt;</span></span>
 </code></pre><p>/app/controllers/application_controller.rbの<code>protect_from_forgery with: :exception</code>の後に下記を追記してください。<br>ログインしているか判定する処理になります。</p>
 <pre><code>before_action <span class="hljs-symbol">:current_user</span>

@@ -164,7 +164,7 @@ TOPページに今作成したページが表示されているはずです。
 このapplication.html.erbはすべてのViewから呼び出されます。  
 ```<%= yield %>``` の位置に他のViewの内容が挿入されます
 
-   
+
 _<%= yield %>前_
 ```
 <div class="header" style="border-bottom:solid 1px #ccc; margin-bottom:10px; padding-bottom:10px;">
@@ -261,7 +261,7 @@ end
     <%= f.password_field :password, class: "form-control"%>
   </div>
 
-  <%= f.submit 'ログイン', class: "btn btn-default" %>
+  <%= f.submit class: "btn btn-default" %>
 <% end %>
 ```
 
