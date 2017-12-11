@@ -299,7 +299,10 @@ private
 <br /><h2 id="wow1_10" class="wow_head">バリデーション</h2>
 <h4 id="wow1_10_1" class="wow_head">今フォームが空の状態でも登録できてしまうのでバリデーションを設定しましょう。</h4>
 <p>実際にユーザーをname, emailが空の状態で、記事をtitle, contentsが空の状態で作成してみましょう。
-　  </p>
+　  </p><br />
+<p>
+  登録できてしまったのを確認したら以下のコードを追加し、登録できないようにしてみましょう。
+</p>
 <p>/app/models/article.rbの<code>class Article &lt; ApplicationRecord</code>の後に下記を追加してください。<br>タイトルとコンテンツが空の状態で登録ができないようにしています。</p>
 <pre><code>validates <span class="hljs-symbol">:title</span>, <span class="hljs-symbol">presence:</span><span class="hljs-literal">true</span>
 validates <span class="hljs-symbol">:contents</span>, <span class="hljs-symbol">presence:</span> <span class="hljs-literal">true</span>
@@ -348,8 +351,8 @@ validates <span class="hljs-symbol">:email</span>, <span class="hljs-symbol">pre
 </table>
 <p>以下のページを参考にしてみてください。<br><a href="https://qiita.com/shunhikita/items/772b81a1cc066e67930e">https://qiita.com/shunhikita/items/772b81a1cc066e67930e</a></p>
 <br /><h2 id="wow1_11" class="wow_head">TOPページの修正</h2>
-<h4 id="wow1_11_1" class="wow_head">TOPページに記事のtitle, writer, memberOnly, showボタンのみの一覧を表示するようにしてみましょう。</h4>
-<p>/app/views/articles/index.html.erb, /app/controllers/articles_controller.rbを参考にしてみましょう。</p>
+<h4 id="wow1_11_1" class="wow_head">TOPページに記事一覧ページのように記事一覧を表示するようにしてみましょう。<br />表示する項目は "title", "writer", showボタン だけを表示してみよう。</h4>
+<p>/app/views/articles/index.html.erb, /app/controllers/articles_controller.rbを参考にしてみてください。</p>
 <br /><h2 id="wow1_12" class="wow_head">デザイン</h2>
 <h4 id="wow1_12_1" class="wow_head">ページが味気ないのでデザインをしてみましょう。</h4>
 <h4 id="wow1_12_2" class="wow_head">今回はBootstrapを使用してデザインしたいと思います。</h4>
