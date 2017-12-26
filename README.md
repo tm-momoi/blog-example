@@ -372,17 +372,17 @@ end
 ```
 <div class="field">
   <%= form.label :writer %>
-  <%= form.text_field :writer, id: :article_writer %>
+  <%= form.text_field :writer, id: :writer %>
 </div>
 
 <div class="field">
   <%= form.label :created_at %>
-  <%= form.date_select :created_at, id: :article_created_at %>
+  <%= form.date_select :created_at, id: :created_at %>
 </div>
 
 <div class="field">
   <%= form.label :updated_at %>
-  <%= form.date_select :updated_at, id: :article_updated_at %>
+  <%= form.date_select :updated_at, id: :updated_at %>
 </div>
 ```
 
