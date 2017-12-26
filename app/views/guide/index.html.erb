@@ -247,7 +247,7 @@ private
 <h4 id="wow1_9_2" class="wow_head">会員のみが記事の作成、会員限定記事の表示をできるようにします。</h4>
 <p>/app/controllers/articles_controller.rbの<code>before_action :set_article, only: [:show, :edit, :update, :destroy]</code>の後に下記を追加してください。<br>Articleをログインしていないと作成できないようにしています。</p>
 <pre><code>before_action <span class="hljs-symbol">:require_sign_in!</span>, <span class="hljs-symbol">only:</span> [<span class="hljs-symbol">:new</span>, <span class="hljs-symbol">:create</span>, <span class="hljs-symbol">:edit</span>, <span class="hljs-symbol">:update</span>, <span class="hljs-symbol">:destroy</span>]
-</code></pre><p>/app/model/article.rbの<code>class Blog &lt; ApplicationRecord</code>と<code>end</code>の間に下記を追加してください。<br>ログイン状況に応じた記事を取り出す処理になります。</p>
+</code></pre><p>/app/model/article.rbの<code>class Article &lt; ApplicationRecord</code>と<code>end</code>の間に下記を追加してください。<br>ログイン状況に応じた記事を取り出す処理になります。</p>
 <pre><code><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">self</span>.<span class="hljs-title">getArticles</span><span class="hljs-params">(isMember = <span class="hljs-literal">false</span>)</span></span>
   <span class="hljs-keyword">if</span> (isMember)
     Article.all
